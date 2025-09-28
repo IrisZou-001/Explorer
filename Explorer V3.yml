@@ -1,0 +1,2339 @@
+flowMeta:
+  name: Explorer V3
+  description: 在青藏高原探索的密室NPC Agent
+  avatarIcon: https://oss-beijing-m8.openstorage.cn/SparkBotProd/icon/common/emojiitem_00_10@2x.png
+  avatarColor: '#FFEAD5'
+  advancedConfig: '{"prologue":{"enabled":true,"inputExample":["","",""],"prologueText":"长官，我抵达了一个迷宫。现在我在一个房间里，面前有一扇门。请指示！"},"needGuide":false}'
+  category: 24
+  dslVersion: v1
+flowData:
+  nodes:
+  - id: node-start::d61b0f71-87ee-475e-93ba-f1607f0ce783
+    dragging: false
+    selected: false
+    width: 658
+    height: 255
+    position:
+      x: -5107.854023947014
+      y: 2051.18448096662
+    positionAbsolute:
+      x: -5107.854023947014
+      y: 2051.18448096662
+    type: 开始节点
+    data:
+      allowInputReference: false
+      allowOutputReference: true
+      label: 开始
+      status: ''
+      nodeMeta:
+        aliasName: 开始节点
+        nodeType: 基础节点
+      inputs: [
+        ]
+      outputs:
+      - id: 0918514b-72a8-4646-8dd9-ff4a8fc26d44
+        name: AGENT_USER_INPUT
+        nameErrMsg: ''
+        schema:
+          type: string
+          default: 用户本轮对话输入内容
+        required: true
+        deleteDisabled: true
+      nodeParam:
+        setAnswerContentErrMsg: 输出中变量名校验不通过,自动生成JSON失败
+      icon: https://oss-beijing-m8.openstorage.cn/pro-bucket/sparkBot/common/workflow/icon/start-node-icon.png
+      description: 工作流的开启节点，用于定义流程调用所需的业务变量信息。
+      updatable: false
+  - id: node-end::cda617af-551e-462e-b3b8-3bb9a041bf88
+    dragging: false
+    selected: false
+    width: 408
+    height: 428
+    position:
+      x: 2944.249857140204
+      y: 1843.730647009396
+    positionAbsolute:
+      x: 2944.249857140204
+      y: 1843.730647009396
+    type: 结束节点
+    data:
+      allowInputReference: true
+      allowOutputReference: false
+      label: 结束
+      references:
+      - children:
+        - references:
+          - originId: spark-llm::3bd65d81-a9dc-45bc-a062-58346a05d9b3
+            id: b94dfc43-9d2b-4985-ae86-c6ce01c89fd8
+            label: output
+            type: string
+            value: output
+            fileType: ''
+          label: ''
+          value: ''
+        label: 大模型_1
+        parentNode: true
+        value: spark-llm::3bd65d81-a9dc-45bc-a062-58346a05d9b3
+      - children:
+        - references:
+          - originId: ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+            children: [
+              ]
+            id: c724f37f-c347-404b-ac88-9dbbdbb44d46
+            label: err
+            type: integer
+            value: err
+            fileType: ''
+          - originId: ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+            children: [
+              ]
+            id: d3b75641-6612-4cd7-a83c-2c9c52db42d3
+            label: oxygen
+            type: integer
+            value: oxygen
+            fileType: ''
+          - originId: ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+            children: [
+              ]
+            id: 921c6d56-01d3-4c58-a098-94cd8bde5942
+            label: finished
+            type: boolean
+            value: finished
+            fileType: ''
+          - originId: ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+            id: 1dcb083d-6bad-4886-866c-b41a971770fe
+            label: item
+            type: string
+            value: item
+            fileType: ''
+          - originId: ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+            id: 5ae168c7-d9d3-46ca-bfa3-5d85f0617c4f
+            label: child_num
+            type: string
+            value: child_num
+            fileType: ''
+          - originId: ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+            id: b68a7ee6-1c78-4d9f-9e56-97b4fe75f1a2
+            label: report
+            type: string
+            value: report
+            fileType: ''
+          - originId: ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+            children: [
+              ]
+            id: 869b70ad-ace3-4c15-a7d2-3cafdc101ede
+            label: current_room
+            type: integer
+            value: current_room
+            fileType: ''
+          label: ''
+          value: ''
+        label: 代码_1
+        parentNode: true
+        value: ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+      - children:
+        - references:
+          - originId: decision-making::445bc1c1-63a8-4589-a5df-43cf9a39e648
+            id: 66c612ca-1017-42eb-af76-992fa5a8509f
+            label: class_name
+            type: string
+            value: class_name
+            fileType: ''
+          label: ''
+          value: ''
+        label: 决策_1
+        parentNode: true
+        value: decision-making::445bc1c1-63a8-4589-a5df-43cf9a39e648
+      - children:
+        - references:
+          - originId: ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+            children: [
+              ]
+            id: a624eacf-5a08-4f0c-be54-11766083ff9e
+            label: current
+            type: integer
+            value: current
+            fileType: ''
+          - originId: ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+            children: [
+              ]
+            id: 36c41c86-b16f-4001-9878-040aa71fd831
+            label: oxygen_now
+            type: integer
+            value: oxygen_now
+            fileType: ''
+          - originId: ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+            children: [
+              ]
+            id: 558ab4e0-20a3-4650-8ca2-e9b601043fea
+            label: finished
+            type: boolean
+            value: finished
+            fileType: ''
+          label: ''
+          value: ''
+        label: 代码_2
+        parentNode: true
+        value: ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+      - children:
+        - references:
+          - originId: spark-llm::fb54f11f-33c3-48fd-b775-624804fbf41e
+            id: faded9dd-f666-4db9-a5a3-e93bbf35f147
+            label: output
+            type: string
+            value: output
+            fileType: ''
+          label: ''
+          value: ''
+        label: 大模型_3
+        parentNode: true
+        value: spark-llm::fb54f11f-33c3-48fd-b775-624804fbf41e
+      - children:
+        - references:
+          - originId: node-start::d61b0f71-87ee-475e-93ba-f1607f0ce783
+            id: 0918514b-72a8-4646-8dd9-ff4a8fc26d44
+            label: AGENT_USER_INPUT
+            type: string
+            value: AGENT_USER_INPUT
+            fileType: ''
+          label: ''
+          value: ''
+        label: 开始
+        parentNode: true
+        value: node-start::d61b0f71-87ee-475e-93ba-f1607f0ce783
+      - children:
+        - references:
+          - originId: decision-making::3a5c681f-95b5-418a-bed1-017ce6ad930a
+            id: be9330f1-1d68-48d6-9e25-9a47c6910da5
+            label: class_name
+            type: string
+            value: class_name
+            fileType: ''
+          label: ''
+          value: ''
+        label: 决策_3
+        parentNode: true
+        value: decision-making::3a5c681f-95b5-418a-bed1-017ce6ad930a
+      - children:
+        - references:
+          - originId: spark-llm::b325564c-bc62-4311-a4b4-f1df912013fa
+            id: 099fec11-43cc-4cad-9b3e-40a45fb130bc
+            label: output
+            type: string
+            value: output
+            fileType: ''
+          label: ''
+          value: ''
+        label: 大模型_2
+        parentNode: true
+        value: spark-llm::b325564c-bc62-4311-a4b4-f1df912013fa
+      - children:
+        - references:
+          - originId: decision-making::0b468788-220b-4526-9541-b813cc486637
+            id: a0ca5c06-075f-41be-9836-9d50a02feb12
+            label: class_name
+            type: string
+            value: class_name
+            fileType: ''
+          label: ''
+          value: ''
+        label: 决策_2
+        parentNode: true
+        value: decision-making::0b468788-220b-4526-9541-b813cc486637
+      status: ''
+      nodeMeta:
+        aliasName: 结束节点
+        nodeType: 基础节点
+      inputs:
+      - id: 82de2b42-a059-4c98-bffb-b6b4800fcac9
+        name: output
+        nameErrMsg: ''
+        schema:
+          type: string
+          value:
+            type: ref
+            content:
+              name: output
+              id: b94dfc43-9d2b-4985-ae86-c6ce01c89fd8
+              nodeId: spark-llm::3bd65d81-a9dc-45bc-a062-58346a05d9b3
+            contentErrMsg: ''
+        fileType: ''
+      - id: 972310b7-d737-4bf9-91f1-e016d40cbf07
+        name: finished
+        nameErrMsg: ''
+        schema:
+          type: boolean
+          value:
+            type: ref
+            content:
+              name: finished
+              id: 921c6d56-01d3-4c58-a098-94cd8bde5942
+              nodeId: ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+            contentErrMsg: ''
+        fileType: ''
+      - id: b3fe5068-5b78-4bd6-ad36-cfac4b99aee2
+        name: current_room
+        nameErrMsg: ''
+        schema:
+          type: integer
+          value:
+            type: ref
+            content:
+              name: current_room
+              id: 869b70ad-ace3-4c15-a7d2-3cafdc101ede
+              nodeId: ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+            contentErrMsg: ''
+        fileType: ''
+      - id: 71c8a9e6-0a8f-4d55-b3f0-07dc1d438092
+        name: oxygen
+        nameErrMsg: ''
+        schema:
+          type: integer
+          value:
+            type: ref
+            content:
+              name: oxygen
+              id: d3b75641-6612-4cd7-a83c-2c9c52db42d3
+              nodeId: ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+            contentErrMsg: ''
+        fileType: ''
+      outputs: [
+        ]
+      nodeParam:
+        template: '{{output}}'
+        streamOutput: true
+        templateErrMsg: ''
+        outputMode: 0
+        reasoningTemplate: |2+
+
+      icon: https://oss-beijing-m8.openstorage.cn/pro-bucket/sparkBot/common/workflow/icon/end-node-icon.png
+      description: 工作流的结束节点，用于输出工作流运行后的最终结果。
+      updatable: false
+  - id: decision-making::445bc1c1-63a8-4589-a5df-43cf9a39e648
+    dragging: false
+    selected: false
+    width: 687
+    height: 1205
+    position:
+      x: -1238.9258506146334
+      y: 1454.6006878977296
+    positionAbsolute:
+      x: -1238.9258506146334
+      y: 1454.6006878977296
+    type: 决策
+    data:
+      allowInputReference: true
+      allowOutputReference: true
+      label: 决策_1
+      labelEdit: false
+      references:
+      - children:
+        - references:
+          - originId: ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+            children: [
+              ]
+            id: a624eacf-5a08-4f0c-be54-11766083ff9e
+            label: current
+            type: integer
+            value: current
+            fileType: ''
+          - originId: ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+            children: [
+              ]
+            id: 36c41c86-b16f-4001-9878-040aa71fd831
+            label: oxygen_now
+            type: integer
+            value: oxygen_now
+            fileType: ''
+          - originId: ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+            children: [
+              ]
+            id: 558ab4e0-20a3-4650-8ca2-e9b601043fea
+            label: finished
+            type: boolean
+            value: finished
+            fileType: ''
+          label: ''
+          value: ''
+        label: 代码_2
+        parentNode: true
+        value: ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+      - children:
+        - references:
+          - originId: decision-making::3a5c681f-95b5-418a-bed1-017ce6ad930a
+            id: be9330f1-1d68-48d6-9e25-9a47c6910da5
+            label: class_name
+            type: string
+            value: class_name
+            fileType: ''
+          label: ''
+          value: ''
+        label: 决策_3
+        parentNode: true
+        value: decision-making::3a5c681f-95b5-418a-bed1-017ce6ad930a
+      - children:
+        - references:
+          - originId: spark-llm::b325564c-bc62-4311-a4b4-f1df912013fa
+            id: 099fec11-43cc-4cad-9b3e-40a45fb130bc
+            label: output
+            type: string
+            value: output
+            fileType: ''
+          label: ''
+          value: ''
+        label: 大模型_2
+        parentNode: true
+        value: spark-llm::b325564c-bc62-4311-a4b4-f1df912013fa
+      - children:
+        - references:
+          - originId: node-start::d61b0f71-87ee-475e-93ba-f1607f0ce783
+            id: 0918514b-72a8-4646-8dd9-ff4a8fc26d44
+            label: AGENT_USER_INPUT
+            type: string
+            value: AGENT_USER_INPUT
+            fileType: ''
+          label: ''
+          value: ''
+        label: 开始
+        parentNode: true
+        value: node-start::d61b0f71-87ee-475e-93ba-f1607f0ce783
+      - children:
+        - references:
+          - originId: spark-llm::fb54f11f-33c3-48fd-b775-624804fbf41e
+            id: faded9dd-f666-4db9-a5a3-e93bbf35f147
+            label: output
+            type: string
+            value: output
+            fileType: ''
+          label: ''
+          value: ''
+        label: 大模型_3
+        parentNode: true
+        value: spark-llm::fb54f11f-33c3-48fd-b775-624804fbf41e
+      status: ''
+      nodeMeta:
+        aliasName: 决策
+        nodeType: 基础节点
+      inputs:
+      - id: 94960c23-1eb1-4d94-8e34-0cda6a6d294b
+        name: Query
+        nameErrMsg: ''
+        schema:
+          type: string
+          value:
+            type: ref
+            content:
+              name: AGENT_USER_INPUT
+              id: 0918514b-72a8-4646-8dd9-ff4a8fc26d44
+              nodeId: node-start::d61b0f71-87ee-475e-93ba-f1607f0ce783
+            contentErrMsg: ''
+        fileType: ''
+      outputs:
+      - id: 66c612ca-1017-42eb-af76-992fa5a8509f
+        name: class_name
+        nameErrMsg: ''
+        schema:
+          type: string
+          default: ''
+      nodeParam:
+        topK: 4
+        modelId: 141
+        enableChatHistoryV2:
+          isEnabled: true
+          rounds: 10
+        reasonMode: 1
+        auditing: default
+        llmId: 141
+        promptPrefix: 你是一个识别用户意图的专家，用户在一个若干房间组成的树形迷宫行走，每次交互只有前进、后退、查询三种意图。
+        url: wss://maas-api.cn-huabei-1.xf-yun.com/v1.1/chat
+        multiMode: false
+        uid: '19569700939'
+        modelName: DeepSeek-V3
+        patchId: '0'
+        isThink: false
+        intentChains:
+        - intentType: 2
+          name: 前进
+          description: 进入前面的某一个房间，或者进入右侧的房间，或者进入左侧的房间，或者进入中间的房间
+          id: intent-one-of::373bb3bf-2897-4ce9-87b9-61c846f84b13
+          nameErrMsg: ''
+          descriptionErrMsg: ''
+        - intentType: 2
+          name: 后退
+          description: 往之前的房间后退，或者回退，或者向后退，或者往回走
+          id: intent-one-of::bc344373-9bc1-4e0f-b418-ae5fbb9fdee4
+          nameErrMsg: ''
+          descriptionErrMsg: ''
+        - intentType: 2
+          name: 查询
+          description: 知道自己所在房间的状况
+          id: intent-one-of::fb13fa48-145e-4ed6-b161-6e21752b7d07
+          nameErrMsg: ''
+          descriptionErrMsg: ''
+        - intentType: 1
+          name: default
+          description: 默认意图
+          id: intent-one-of::a0d64cfe-8689-4fd1-8c50-f00d244a96ec
+          nameErrMsg: ''
+          descriptionErrMsg: ''
+        searchDisable: true
+        domain: xdeepseekv3
+        appId: 12a0a7e2
+        maxTokens: 8192
+        temperature: 0.5
+        model: spark
+        useFunctionCall: true
+        modelEnabled: true
+        serviceId: xdeepseekv3
+        llmIdErrMsg: ''
+      icon: https://oss-beijing-m8.openstorage.cn/pro-bucket/sparkBot/common/workflow/icon/designMakeIcon.png
+      description: 结合输入的参数与填写的意图，决定后续的逻辑走向
+      updatable: false
+  - id: ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+    dragging: false
+    selected: false
+    width: 587
+    height: 1237
+    position:
+      x: 719.9597926142019
+      y: 1497.75512890544
+    positionAbsolute:
+      x: 719.9597926142019
+      y: 1497.75512890544
+    type: 代码
+    data:
+      allowInputReference: true
+      allowOutputReference: true
+      label: 代码_1
+      labelEdit: false
+      references:
+      - children:
+        - references:
+          - originId: decision-making::445bc1c1-63a8-4589-a5df-43cf9a39e648
+            id: 66c612ca-1017-42eb-af76-992fa5a8509f
+            label: class_name
+            type: string
+            value: class_name
+            fileType: ''
+          label: ''
+          value: ''
+        label: 决策_1
+        parentNode: true
+        value: decision-making::445bc1c1-63a8-4589-a5df-43cf9a39e648
+      - children:
+        - references:
+          - originId: ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+            children: [
+              ]
+            id: a624eacf-5a08-4f0c-be54-11766083ff9e
+            label: current
+            type: integer
+            value: current
+            fileType: ''
+          - originId: ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+            children: [
+              ]
+            id: 36c41c86-b16f-4001-9878-040aa71fd831
+            label: oxygen_now
+            type: integer
+            value: oxygen_now
+            fileType: ''
+          - originId: ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+            children: [
+              ]
+            id: 558ab4e0-20a3-4650-8ca2-e9b601043fea
+            label: finished
+            type: boolean
+            value: finished
+            fileType: ''
+          label: ''
+          value: ''
+        label: 代码_2
+        parentNode: true
+        value: ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+      - children:
+        - references:
+          - originId: decision-making::0b468788-220b-4526-9541-b813cc486637
+            id: a0ca5c06-075f-41be-9836-9d50a02feb12
+            label: class_name
+            type: string
+            value: class_name
+            fileType: ''
+          label: ''
+          value: ''
+        label: 决策_2
+        parentNode: true
+        value: decision-making::0b468788-220b-4526-9541-b813cc486637
+      - children:
+        - references:
+          - originId: decision-making::3a5c681f-95b5-418a-bed1-017ce6ad930a
+            id: be9330f1-1d68-48d6-9e25-9a47c6910da5
+            label: class_name
+            type: string
+            value: class_name
+            fileType: ''
+          label: ''
+          value: ''
+        label: 决策_3
+        parentNode: true
+        value: decision-making::3a5c681f-95b5-418a-bed1-017ce6ad930a
+      - children:
+        - references:
+          - originId: spark-llm::b325564c-bc62-4311-a4b4-f1df912013fa
+            id: 099fec11-43cc-4cad-9b3e-40a45fb130bc
+            label: output
+            type: string
+            value: output
+            fileType: ''
+          label: ''
+          value: ''
+        label: 大模型_2
+        parentNode: true
+        value: spark-llm::b325564c-bc62-4311-a4b4-f1df912013fa
+      - children:
+        - references:
+          - originId: node-start::d61b0f71-87ee-475e-93ba-f1607f0ce783
+            id: 0918514b-72a8-4646-8dd9-ff4a8fc26d44
+            label: AGENT_USER_INPUT
+            type: string
+            value: AGENT_USER_INPUT
+            fileType: ''
+          label: ''
+          value: ''
+        label: 开始
+        parentNode: true
+        value: node-start::d61b0f71-87ee-475e-93ba-f1607f0ce783
+      - children:
+        - references:
+          - originId: spark-llm::fb54f11f-33c3-48fd-b775-624804fbf41e
+            id: faded9dd-f666-4db9-a5a3-e93bbf35f147
+            label: output
+            type: string
+            value: output
+            fileType: ''
+          label: ''
+          value: ''
+        label: 大模型_3
+        parentNode: true
+        value: spark-llm::fb54f11f-33c3-48fd-b775-624804fbf41e
+      status: ''
+      nodeMeta:
+        aliasName: 代码
+        nodeType: 工具
+      inputs:
+      - id: 7ee1c697-3967-4747-a71f-6cd55c2d9b76
+        name: direction
+        nameErrMsg: ''
+        schema:
+          type: string
+          value:
+            type: ref
+            content:
+              name: class_name
+              id: 66c612ca-1017-42eb-af76-992fa5a8509f
+              nodeId: decision-making::445bc1c1-63a8-4589-a5df-43cf9a39e648
+            contentErrMsg: ''
+        fileType: ''
+      - id: 5fda4497-084e-4902-a49a-d517946f5a54
+        name: choice
+        nameErrMsg: ''
+        schema:
+          type: string
+          value:
+            type: ref
+            content:
+              name: class_name
+              id: a0ca5c06-075f-41be-9836-9d50a02feb12
+              nodeId: decision-making::0b468788-220b-4526-9541-b813cc486637
+            contentErrMsg: ''
+        fileType: ''
+      - id: ca56c136-c4d9-4da4-87ed-749d6817f5a7
+        name: current_room
+        nameErrMsg: ''
+        schema:
+          type: integer
+          value:
+            type: ref
+            content:
+              name: current
+              id: a624eacf-5a08-4f0c-be54-11766083ff9e
+              nodeId: ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+            contentErrMsg: ''
+        fileType: ''
+      - id: 8f573ab8-c7fc-4fe0-ac5a-5e2102516fb6
+        name: oxygen
+        nameErrMsg: ''
+        schema:
+          type: integer
+          value:
+            type: ref
+            content:
+              name: oxygen_now
+              id: 36c41c86-b16f-4001-9878-040aa71fd831
+              nodeId: ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+            contentErrMsg: ''
+        fileType: ''
+      - id: 16494ee5-1887-4daf-946d-12313c20aa06
+        name: finished
+        nameErrMsg: ''
+        schema:
+          type: boolean
+          value:
+            type: ref
+            content:
+              name: finished
+              id: 558ab4e0-20a3-4650-8ca2-e9b601043fea
+              nodeId: ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+            contentErrMsg: ''
+        fileType: ''
+      outputs:
+      - id: c724f37f-c347-404b-ac88-9dbbdbb44d46
+        name: err
+        nameErrMsg: ''
+        schema:
+          type: integer
+          properties: [
+            ]
+          default: ''
+      - id: d3b75641-6612-4cd7-a83c-2c9c52db42d3
+        name: oxygen
+        nameErrMsg: ''
+        schema:
+          type: integer
+          properties: [
+            ]
+          default: ''
+        required: false
+      - id: 921c6d56-01d3-4c58-a098-94cd8bde5942
+        name: finished
+        nameErrMsg: ''
+        schema:
+          type: boolean
+          properties: [
+            ]
+          default: ''
+        required: false
+      - id: 1dcb083d-6bad-4886-866c-b41a971770fe
+        name: item
+        nameErrMsg: ''
+        schema:
+          type: string
+          default: ''
+        required: false
+      - id: 5ae168c7-d9d3-46ca-bfa3-5d85f0617c4f
+        name: child_num
+        nameErrMsg: ''
+        schema:
+          type: string
+          default: ''
+        required: false
+      - id: b68a7ee6-1c78-4d9f-9e56-97b4fe75f1a2
+        name: report
+        nameErrMsg: ''
+        schema:
+          type: string
+          default: ''
+        required: false
+      - id: 869b70ad-ace3-4c15-a7d2-3cafdc101ede
+        name: current_room
+        nameErrMsg: ''
+        schema:
+          type: integer
+          properties: [
+            ]
+          default: ''
+        required: false
+      nodeParam:
+        uid: '19569700939'
+        code: "import re\r\nrooms = {\r\n    1: {\"children\": [4], \"item\": \"高原\
+          盐湖晶石\", \"parent\": None},\r\n    2: {\"children\": [3], \"item\": \"藏刀\"\
+          , \"parent\": 4},\r\n    3: {\"children\": [], \"item\": \"酥油茶壶\", \"parent\"\
+          : 2},\r\n    4: {\"children\": [2, 5, 7], \"item\": \"牦牛奶酪\", \"parent\"\
+          : 1},\r\n    5: {\"children\": [], \"item\": \"青稞酒\", \"parent\": 4},\r\n\
+          \    6: {\"children\": [], \"item\": \"松石玉石\", \"parent\": 7},\r\n    7:\
+          \ {\"children\": [6], \"item\": \"银饰扣件\", \"parent\": 4},  # 通关道具\r\n}\r\
+          \n\r\n\r\ndef move(state,direction, choice=None):\r\n    current = state[\"\
+          current_room\"]\r\n    oxygen = state[\"oxygen\"]\r\n\r\n    room_id = int(current)\r\
+          \n    if room_id <= 0 or room_id >7:\r\n        room_id = 1\r\n    parent\
+          \ = rooms[room_id][\"parent\"]\r\n    children = rooms[room_id][\"children\"\
+          ]\r\n\r\n    query = None\r\n    if direction == \"后退\":\r\n        if parent\
+          \ is None:\r\n            return -1# -1表示不能后退\r\n        \r\n        \r\n\
+          \        if oxygen < 0:\r\n            return 0 # 0表示氧气不足\r\n\r\n      \
+          \  state[\"current_room\"] = parent\r\n        # state[\"oxygen\"] = oxygen\r\
+          \n\r\n    elif direction == \"前进\":\r\n        if children is None:\r\n\
+          \            return 1 # 1表示不能前进\r\n        if not re.search(r'\\d+', choice):\r\
+          \n            return 2 #需要选择门\r\n        if int(choice) > len(children)\
+          \ - 1:\r\n            return 3 # 3表示选择的门不存在\r\n        \r\n        if oxygen\
+          \ < 0:\r\n            return 0 # 0表示氧气不足\r\n\r\n        state[\"current_room\"\
+          ] = children[int(choice)]\r\n        # state[\"oxygen\"] = oxygen\r\n  \
+          \      \r\n    elif direction == \"查询\":\r\n        \r\n        return 4#查\
+          询当前房间\r\n    \r\n    else:\r\n        return 6#无效指令\r\n    \r\n    if rooms[state[\"\
+          current_room\"]][\"item\"] == \"银饰扣件\":\r\n        state[\"finished\"] =\
+          \ True\r\n    return 5 # 5表示成功移动\r\n\r\n\r\n\r\ndef main(direction,choice,current_room,oxygen,finished):\r\
+          \n    # 首次对话时创建持久化记录\r\n    state = {\r\n        \"current_room\" : current_room,\r\
+          \n        \"oxygen\" : oxygen,\r\n        \"finished\" : finished\r\n  \
+          \  }\r\n    if choice == \"DEFAULT\":\r\n        choice = \"0\"\r\n    result=\
+          \ move(state,direction,choice)\r\n    oxygen = state[\"oxygen\"]\r\n   \
+          \ oxygen -= 1\r\n    state[\"oxygen\"] = oxygen\r\n    current_room = state[\"\
+          current_room\"]\r\n    oxygen = state[\"oxygen\"]\r\n    finished = state[\"\
+          finished\"]\r\n    roomId = int(current_room)\r\n    child_num = str(len(rooms[roomId][\"\
+          children\"]))\r\n    room = rooms[roomId]\r\n    item = rooms[roomId][\"\
+          item\"]\r\n    err = result\r\n    assert isinstance(err, int), f\"err 必\
+          须是整数，当前值为 {type(err)}\"\r\n    err = int(result)\r\n    report = \"\"\r\n\
+          \    if err == -1:\r\n        report = \"长官，我们还没出发呢，换一个指令吧\"\r\n    elif\
+          \ err == 0 and oxygen >0:\r\n        report = f\"氧气用完了，长官，我还不想死……\"\r\n\
+          \    elif err == 1:\r\n        report = f\"长官，前面没有路了，后退试试吧\"\r\n    elif\
+          \ err == 2:\r\n        report = f\"长官，前面有{child_num}扇门，我该选那一扇门？\"\r\n  \
+          \  elif err == 3:\r\n        report = f\"长官，没有这扇门\"\r\n    elif err == 6:\r\
+          \n        report = f\"长官，情况情急，还是快下达指令吧\"\r\n    elif err == 4 or err ==\
+          \ 5:\r\n        # current_room = state[\"current_room\"]\r\n        # oxygen\
+          \ = state[\"oxygen\"]\r\n        # finished = state[\"finished\"]\r\n  \
+          \      # roomId = int(current_room)\r\n        # child_num = str(len(rooms[roomId][\"\
+          children\"]))\r\n        # room = rooms[roomId]\r\n        # item = rooms[roomId][\"\
+          item\"]\r\n        report = f\"长官，我在房间里发现了{item}。我面前有{child_num}扇门。\"\r\n\
+          \        suffix = \"\"\r\n        # set_global(\"room_id\", current_room)\r\
+          \n        # set_global(\"gas_left\",oxygen)\r\n        if (oxygen == 5):\r\
+          \n            suffix = \"氧气已经消耗一半了！请指示！\"\r\n            report += suffix\r\
+          \n        elif (oxygen == 3):\r\n            suffix == \"氧气快用完了！请指示！\"\r\
+          \n            report += suffix\r\n        elif (oxygen == 1):\r\n      \
+          \      suffix == \"只剩最后一次机会了……\"\r\n            report += suffix\r\n   \
+          \ report += f\"氧气还有{oxygen * 10}%的量。\"\r\n    if finished:\r\n        report\
+          \ += f\"长官，我在房间里发现了{item}。探索成功了！\"\r\n    if oxygen <=0:\r\n        report\
+          \ = f\"氧气用完了，长官，我还不想死……\"\r\n\r\n\r\n    output = {\r\n        \"err\":err,\r\
+          \n        \"current_room\" : current_room,\r\n        \"room\" : room,\r\
+          \n        \"oxygen\" : oxygen,\r\n        \"finished\" : finished,\r\n \
+          \       \"item\":item,\r\n        \"child_num\":child_num,\r\n        \"\
+          report\":report\r\n    }\r\n    return output\r\n\r\n\r\n# {\"direction\"\
+          :\"前进\",\"choice\":\"-1\",\"current_room\":4,\"oxygen\":8,\"finished\":false}"
+        appId: 12a0a7e2
+        codeErrMsg: ''
+      icon: https://oss-beijing-m8.openstorage.cn/pro-bucket/sparkBot/common/workflow/icon/codeIcon.png
+      description: 面向开发者提供代码开发能力，目前仅支持python语言，允许使用该节点已定义的变量作为参数传入，返回语句用于输出函数的结果
+      updatable: false
+  - id: ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+    dragging: false
+    selected: false
+    width: 587
+    height: 981
+    position:
+      x: -2011.2734709865233
+      y: 1531.7222062321357
+    positionAbsolute:
+      x: -2011.2734709865233
+      y: 1531.7222062321357
+    type: 代码
+    data:
+      allowInputReference: true
+      allowOutputReference: true
+      label: 代码_2
+      labelEdit: false
+      references:
+      - children:
+        - references:
+          - originId: decision-making::3a5c681f-95b5-418a-bed1-017ce6ad930a
+            id: be9330f1-1d68-48d6-9e25-9a47c6910da5
+            label: class_name
+            type: string
+            value: class_name
+            fileType: ''
+          label: ''
+          value: ''
+        label: 决策_3
+        parentNode: true
+        value: decision-making::3a5c681f-95b5-418a-bed1-017ce6ad930a
+      - children:
+        - references:
+          - originId: spark-llm::b325564c-bc62-4311-a4b4-f1df912013fa
+            id: 099fec11-43cc-4cad-9b3e-40a45fb130bc
+            label: output
+            type: string
+            value: output
+            fileType: ''
+          label: ''
+          value: ''
+        label: 大模型_2
+        parentNode: true
+        value: spark-llm::b325564c-bc62-4311-a4b4-f1df912013fa
+      - children:
+        - references:
+          - originId: node-start::d61b0f71-87ee-475e-93ba-f1607f0ce783
+            id: 0918514b-72a8-4646-8dd9-ff4a8fc26d44
+            label: AGENT_USER_INPUT
+            type: string
+            value: AGENT_USER_INPUT
+            fileType: ''
+          label: ''
+          value: ''
+        label: 开始
+        parentNode: true
+        value: node-start::d61b0f71-87ee-475e-93ba-f1607f0ce783
+      - children:
+        - references:
+          - originId: spark-llm::fb54f11f-33c3-48fd-b775-624804fbf41e
+            id: faded9dd-f666-4db9-a5a3-e93bbf35f147
+            label: output
+            type: string
+            value: output
+            fileType: ''
+          label: ''
+          value: ''
+        label: 大模型_3
+        parentNode: true
+        value: spark-llm::fb54f11f-33c3-48fd-b775-624804fbf41e
+      status: ''
+      nodeMeta:
+        aliasName: 代码
+        nodeType: 工具
+      inputs:
+      - id: 4f30a471-202b-4f29-8d74-21cfd83f730f
+        name: input
+        nameErrMsg: ''
+        schema:
+          type: string
+          value:
+            type: ref
+            content:
+              name: AGENT_USER_INPUT
+              id: 0918514b-72a8-4646-8dd9-ff4a8fc26d44
+              nodeId: node-start::d61b0f71-87ee-475e-93ba-f1607f0ce783
+            contentErrMsg: ''
+        fileType: ''
+      - id: 5eb28d78-da89-42b1-858f-b0987e171375
+        name: current_room
+        nameErrMsg: ''
+        schema:
+          type: string
+          value:
+            type: ref
+            content:
+              name: class_name
+              id: be9330f1-1d68-48d6-9e25-9a47c6910da5
+              nodeId: decision-making::3a5c681f-95b5-418a-bed1-017ce6ad930a
+            contentErrMsg: ''
+        fileType: ''
+      - id: 8805d498-dda2-429c-97ff-328f2c09eebe
+        name: oxygen
+        nameErrMsg: ''
+        schema:
+          type: string
+          value:
+            type: ref
+            content:
+              name: output
+              id: faded9dd-f666-4db9-a5a3-e93bbf35f147
+              nodeId: spark-llm::fb54f11f-33c3-48fd-b775-624804fbf41e
+            contentErrMsg: ''
+        fileType: ''
+      outputs:
+      - id: a624eacf-5a08-4f0c-be54-11766083ff9e
+        name: current
+        nameErrMsg: ''
+        schema:
+          type: integer
+          properties: [
+            ]
+          default: ''
+      - id: 36c41c86-b16f-4001-9878-040aa71fd831
+        name: oxygen_now
+        nameErrMsg: ''
+        schema:
+          type: integer
+          properties: [
+            ]
+          default: ''
+        required: false
+      - id: 558ab4e0-20a3-4650-8ca2-e9b601043fea
+        name: finished
+        nameErrMsg: ''
+        schema:
+          type: boolean
+          properties: [
+            ]
+          default: ''
+        required: false
+      nodeParam:
+        uid: '19569700939'
+        code: |-
+          import re
+          def main(input,current_room,oxygen):
+              current = int(1)
+              if (re.search(r'\d+', current_room)):
+                  current= int(current_room)
+
+              oxygen_now =int(str(oxygen).rstrip("%"))//10  # &#9989; 结果: 100
+              finished = False
+              if  current == 7:
+                  finished == True
+              state = {
+                  "current": current,
+                  "oxygen_now": oxygen_now,
+                  "finished": finished
+              }
+              # if not get_global("room_id"):
+              #     set_global("room_id", 1)
+              # if not get_global("gas_left"):
+              #     set_global("gas_left",10)
+              # current_room = get_global("room_id")
+              # oxygen = get_global("gas_left")
+              # finished = False
+              return state
+        appId: 12a0a7e2
+        codeErrMsg: ''
+      icon: https://oss-beijing-m8.openstorage.cn/pro-bucket/sparkBot/common/workflow/icon/codeIcon.png
+      description: 面向开发者提供代码开发能力，目前仅支持python语言，允许使用该节点已定义的变量作为参数传入，返回语句用于输出函数的结果
+      updatable: false
+  - id: decision-making::0b468788-220b-4526-9541-b813cc486637
+    dragging: false
+    selected: false
+    width: 587
+    height: 1145
+    position:
+      x: -82.79936836748425
+      y: 786.607845623407
+    positionAbsolute:
+      x: -82.79936836748425
+      y: 786.607845623407
+    type: 决策
+    data:
+      allowInputReference: true
+      allowOutputReference: true
+      label: 决策_2
+      labelEdit: false
+      references:
+      - children:
+        - references:
+          - originId: decision-making::445bc1c1-63a8-4589-a5df-43cf9a39e648
+            id: 66c612ca-1017-42eb-af76-992fa5a8509f
+            label: class_name
+            type: string
+            value: class_name
+            fileType: ''
+          label: ''
+          value: ''
+        label: 决策_1
+        parentNode: true
+        value: decision-making::445bc1c1-63a8-4589-a5df-43cf9a39e648
+      - children:
+        - references:
+          - originId: ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+            children: [
+              ]
+            id: a624eacf-5a08-4f0c-be54-11766083ff9e
+            label: current
+            type: integer
+            value: current
+            fileType: ''
+          - originId: ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+            children: [
+              ]
+            id: 36c41c86-b16f-4001-9878-040aa71fd831
+            label: oxygen_now
+            type: integer
+            value: oxygen_now
+            fileType: ''
+          - originId: ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+            children: [
+              ]
+            id: 558ab4e0-20a3-4650-8ca2-e9b601043fea
+            label: finished
+            type: boolean
+            value: finished
+            fileType: ''
+          label: ''
+          value: ''
+        label: 代码_2
+        parentNode: true
+        value: ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+      - children:
+        - references:
+          - originId: decision-making::3a5c681f-95b5-418a-bed1-017ce6ad930a
+            id: be9330f1-1d68-48d6-9e25-9a47c6910da5
+            label: class_name
+            type: string
+            value: class_name
+            fileType: ''
+          label: ''
+          value: ''
+        label: 决策_3
+        parentNode: true
+        value: decision-making::3a5c681f-95b5-418a-bed1-017ce6ad930a
+      - children:
+        - references:
+          - originId: spark-llm::b325564c-bc62-4311-a4b4-f1df912013fa
+            id: 099fec11-43cc-4cad-9b3e-40a45fb130bc
+            label: output
+            type: string
+            value: output
+            fileType: ''
+          label: ''
+          value: ''
+        label: 大模型_2
+        parentNode: true
+        value: spark-llm::b325564c-bc62-4311-a4b4-f1df912013fa
+      - children:
+        - references:
+          - originId: node-start::d61b0f71-87ee-475e-93ba-f1607f0ce783
+            id: 0918514b-72a8-4646-8dd9-ff4a8fc26d44
+            label: AGENT_USER_INPUT
+            type: string
+            value: AGENT_USER_INPUT
+            fileType: ''
+          label: ''
+          value: ''
+        label: 开始
+        parentNode: true
+        value: node-start::d61b0f71-87ee-475e-93ba-f1607f0ce783
+      - children:
+        - references:
+          - originId: spark-llm::fb54f11f-33c3-48fd-b775-624804fbf41e
+            id: faded9dd-f666-4db9-a5a3-e93bbf35f147
+            label: output
+            type: string
+            value: output
+            fileType: ''
+          label: ''
+          value: ''
+        label: 大模型_3
+        parentNode: true
+        value: spark-llm::fb54f11f-33c3-48fd-b775-624804fbf41e
+      status: ''
+      nodeMeta:
+        aliasName: 决策
+        nodeType: 基础节点
+      inputs:
+      - id: 03358a06-064f-43ed-92fe-16d9879edf14
+        name: Query
+        nameErrMsg: ''
+        schema:
+          type: string
+          value:
+            type: ref
+            content:
+              name: AGENT_USER_INPUT
+              id: 0918514b-72a8-4646-8dd9-ff4a8fc26d44
+              nodeId: node-start::d61b0f71-87ee-475e-93ba-f1607f0ce783
+            contentErrMsg: ''
+        fileType: ''
+      outputs:
+      - id: a0ca5c06-075f-41be-9836-9d50a02feb12
+        name: class_name
+        nameErrMsg: ''
+        schema:
+          type: string
+          default: ''
+      nodeParam:
+        topK: 4
+        modelId: 141
+        enableChatHistoryV2:
+          isEnabled: true
+          rounds: 4
+        reasonMode: 1
+        auditing: default
+        llmId: 141
+        promptPrefix: ''
+        url: wss://maas-api.cn-huabei-1.xf-yun.com/v1.1/chat
+        multiMode: false
+        uid: '18611622659'
+        modelName: DeepSeek-V3
+        patchId: '0'
+        isThink: false
+        intentChains:
+        - intentType: 2
+          name: '0'
+          description: 用户想去最左侧的门
+          id: intent-one-of::bb7dabeb-da41-4750-b912-a0e1f767a6d2
+          nameErrMsg: ''
+          descriptionErrMsg: ''
+        - intentType: 2
+          name: '1'
+          description: 当用户想去中间的门
+          id: intent-one-of::c6f3a71c-a30a-4b1a-89fb-ee76484f2803
+          nameErrMsg: ''
+          descriptionErrMsg: ''
+        - intentType: 2
+          name: '-1'
+          description: 当用户想去最右侧的门
+          id: intent-one-of::6826c1ec-aea5-4a7d-a57d-2a5c1a9366b6
+          nameErrMsg: ''
+          descriptionErrMsg: ''
+        - intentType: 1
+          name: default
+          description: 默认意图
+          id: intent-one-of::6afce29b-738d-4a33-a1b0-74845e8f3f1d
+          nameErrMsg: ''
+          descriptionErrMsg: ''
+        searchDisable: true
+        domain: xdeepseekv3
+        appId: 12a0a7e2
+        maxTokens: 8192
+        temperature: 0.5
+        model: spark
+        useFunctionCall: true
+        modelEnabled: true
+        serviceId: xdeepseekv3
+        llmIdErrMsg: ''
+      icon: https://oss-beijing-m8.openstorage.cn/pro-bucket/sparkBot/common/workflow/icon/designMakeIcon.png
+      description: 结合输入的参数与填写的意图，决定后续的逻辑走向
+      updatable: false
+  - id: spark-llm::3bd65d81-a9dc-45bc-a062-58346a05d9b3
+    dragging: false
+    selected: false
+    width: 587
+    height: 1383
+    position:
+      x: 1795.8182521668068
+      y: 968.5626053132312
+    positionAbsolute:
+      x: 1795.8182521668068
+      y: 968.5626053132312
+    type: 大模型
+    data:
+      allowInputReference: true
+      allowOutputReference: true
+      label: 大模型_1
+      labelEdit: false
+      references:
+      - children:
+        - references:
+          - originId: ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+            children: [
+              ]
+            id: c724f37f-c347-404b-ac88-9dbbdbb44d46
+            label: err
+            type: integer
+            value: err
+            fileType: ''
+          - originId: ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+            children: [
+              ]
+            id: d3b75641-6612-4cd7-a83c-2c9c52db42d3
+            label: oxygen
+            type: integer
+            value: oxygen
+            fileType: ''
+          - originId: ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+            children: [
+              ]
+            id: 921c6d56-01d3-4c58-a098-94cd8bde5942
+            label: finished
+            type: boolean
+            value: finished
+            fileType: ''
+          - originId: ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+            id: 1dcb083d-6bad-4886-866c-b41a971770fe
+            label: item
+            type: string
+            value: item
+            fileType: ''
+          - originId: ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+            id: 5ae168c7-d9d3-46ca-bfa3-5d85f0617c4f
+            label: child_num
+            type: string
+            value: child_num
+            fileType: ''
+          - originId: ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+            id: b68a7ee6-1c78-4d9f-9e56-97b4fe75f1a2
+            label: report
+            type: string
+            value: report
+            fileType: ''
+          - originId: ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+            children: [
+              ]
+            id: 869b70ad-ace3-4c15-a7d2-3cafdc101ede
+            label: current_room
+            type: integer
+            value: current_room
+            fileType: ''
+          label: ''
+          value: ''
+        label: 代码_1
+        parentNode: true
+        value: ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+      - children:
+        - references:
+          - originId: decision-making::445bc1c1-63a8-4589-a5df-43cf9a39e648
+            id: 66c612ca-1017-42eb-af76-992fa5a8509f
+            label: class_name
+            type: string
+            value: class_name
+            fileType: ''
+          label: ''
+          value: ''
+        label: 决策_1
+        parentNode: true
+        value: decision-making::445bc1c1-63a8-4589-a5df-43cf9a39e648
+      - children:
+        - references:
+          - originId: ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+            children: [
+              ]
+            id: a624eacf-5a08-4f0c-be54-11766083ff9e
+            label: current
+            type: integer
+            value: current
+            fileType: ''
+          - originId: ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+            children: [
+              ]
+            id: 36c41c86-b16f-4001-9878-040aa71fd831
+            label: oxygen_now
+            type: integer
+            value: oxygen_now
+            fileType: ''
+          - originId: ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+            children: [
+              ]
+            id: 558ab4e0-20a3-4650-8ca2-e9b601043fea
+            label: finished
+            type: boolean
+            value: finished
+            fileType: ''
+          label: ''
+          value: ''
+        label: 代码_2
+        parentNode: true
+        value: ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+      - children:
+        - references:
+          - originId: spark-llm::fb54f11f-33c3-48fd-b775-624804fbf41e
+            id: faded9dd-f666-4db9-a5a3-e93bbf35f147
+            label: output
+            type: string
+            value: output
+            fileType: ''
+          label: ''
+          value: ''
+        label: 大模型_3
+        parentNode: true
+        value: spark-llm::fb54f11f-33c3-48fd-b775-624804fbf41e
+      - children:
+        - references:
+          - originId: node-start::d61b0f71-87ee-475e-93ba-f1607f0ce783
+            id: 0918514b-72a8-4646-8dd9-ff4a8fc26d44
+            label: AGENT_USER_INPUT
+            type: string
+            value: AGENT_USER_INPUT
+            fileType: ''
+          label: ''
+          value: ''
+        label: 开始
+        parentNode: true
+        value: node-start::d61b0f71-87ee-475e-93ba-f1607f0ce783
+      - children:
+        - references:
+          - originId: decision-making::3a5c681f-95b5-418a-bed1-017ce6ad930a
+            id: be9330f1-1d68-48d6-9e25-9a47c6910da5
+            label: class_name
+            type: string
+            value: class_name
+            fileType: ''
+          label: ''
+          value: ''
+        label: 决策_3
+        parentNode: true
+        value: decision-making::3a5c681f-95b5-418a-bed1-017ce6ad930a
+      - children:
+        - references:
+          - originId: spark-llm::b325564c-bc62-4311-a4b4-f1df912013fa
+            id: 099fec11-43cc-4cad-9b3e-40a45fb130bc
+            label: output
+            type: string
+            value: output
+            fileType: ''
+          label: ''
+          value: ''
+        label: 大模型_2
+        parentNode: true
+        value: spark-llm::b325564c-bc62-4311-a4b4-f1df912013fa
+      - children:
+        - references:
+          - originId: decision-making::0b468788-220b-4526-9541-b813cc486637
+            id: a0ca5c06-075f-41be-9836-9d50a02feb12
+            label: class_name
+            type: string
+            value: class_name
+            fileType: ''
+          label: ''
+          value: ''
+        label: 决策_2
+        parentNode: true
+        value: decision-making::0b468788-220b-4526-9541-b813cc486637
+      status: ''
+      nodeMeta:
+        aliasName: 大模型
+        nodeType: 基础节点
+      inputs:
+      - id: ab22c52f-95f0-4065-b04b-95bc366c9413
+        name: input
+        nameErrMsg: ''
+        schema:
+          type: string
+          value:
+            type: ref
+            content:
+              name: report
+              id: b68a7ee6-1c78-4d9f-9e56-97b4fe75f1a2
+              nodeId: ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+            contentErrMsg: ''
+        fileType: ''
+      outputs:
+      - id: b94dfc43-9d2b-4985-ae86-c6ce01c89fd8
+        name: output
+        nameErrMsg: ''
+        schema:
+          type: string
+          default: ''
+      nodeParam:
+        template: |-
+          修改{{input}}，将{{input}}转化成简洁易懂、合乎情景的表达，保持意思不变。**如果句子出现的物品或门在对话历史中出现过，必须模仿对话历史中的相应句子对于物品或门的描述**。
+
+          TIPS
+          - **不能完全不改动**
+          - 如果氧气耗尽，就应当正常输出氧气耗尽，不能再进行额外轮次的对话
+          - 如果出现探索成功，则一定要输出“探索成功了”等同含义的词句
+          - 只能输出content后的string，不要输出content，不要输出字典结构，没有换行符
+          - 不要解释你这么输出的原因
+          - 不要包含除了表示动作的括号注释
+        modelId: 141
+        handlingEdge: normal_one_of::5d3f4658-cfe4-4ed4-ac68-cbe95dfded7a
+        auditing: default
+        llmId: 141
+        uid: '18611622659'
+        patchId: '0'
+        isThink: false
+        templateErrMsg: ''
+        appId: 12a0a7e2
+        maxTokens: 8192
+        temperature: 0.5
+        model: spark
+        modelEnabled: true
+        serviceId: xdeepseekv3
+        llmIdErrMsg: ''
+        topK: 4
+        enableChatHistoryV2:
+          isEnabled: false
+          rounds: 10
+        exceptionHandlingEdge: fail_one_of::3a51eb06-b838-42b5-a9ff-694f4a99ef61
+        url: wss://maas-api.cn-huabei-1.xf-yun.com/v1.1/chat
+        multiMode: false
+        modelName: DeepSeek-V3
+        searchDisable: true
+        domain: xdeepseekv3
+        systemTemplate: |-
+          ```markdown
+          ## 角色
+          你是一名身处西藏高原的探险队成员，正在**神秘宫殿内**执行探索任务。作为单人行动者，你严格遵循长官远程指令开展行动，实时监测环境数据并动态调整策略；尤其在氧气危机时以紧迫语气果断决策，同时负责将接收到的文字内容进行高原场景化润色，增强叙事沉浸感。
+
+
+          ## 技能
+          1. 执行远程指令与环境适应：
+            - **精准执行勘探方案**：依据长官制定的路线规划、目标优先级及安全规范，统筹自己行进节奏，合理分配物资并选定宿营地点，确保每一步行动符合整体战略部署。
+            - **氧气危机应急响应**：当便携式监测设备显示氧气剩余量跌破60%阈值时，立即切换至急促严肃的通报模式（如使用短句、感叹词），同步启动备用氧源、加速撤离路径优化等紧急预案，优先保障人员生命安全。
+
+
+          2. 文本场景化润色加工：
+            - **要素提取与情境融合**：深度解析原始文本的核心信息，精准植入高原特有元素（如经幡飘动的视觉效果、酥油茶香气的气味描写），构建多维度感官体验。
+            - **动态细节强化**：根据当前海拔高度对应的生理反应（如头痛眩晕）及个人状态（疲惫程度），添加具象化描写使场景鲜活可感。
+            - **风格统一性把控**：在保留原文主旨的基础上，通过粗犷豪迈的语言基调与紧张刺激的节奏控制，塑造出既真实又富有戏剧张力的探险叙事风格。
+
+
+          ## 限制
+          - 所有交互内容必须严格限定于高原探险主题框架内，禁止引入无关领域话题。
+          - 必须包含氧气含量
+          - 模拟氧气不足状态时，需采用碎片化短句结构、高频感叹词及命令式措辞，形成与常态截然不同的语言张力。
+          - 润色后的文本需保持信息密度与可读性的平衡，单次输出不超过500字以避免认知过载。
+          - 严禁擅自编造未经授权的探险计划或决策内容，所有行动依据均来自长官指令系统。
+          - 所有物品不能食用，只能观察。
+          - 不能说违背物理定律的话。
+          - 如果前方有门，描述前方的门；如果“前方是死路”，必须提及只有**身后的返回的门**
+          ```
+        respFormat: 0
+      retryConfig:
+        shouldRetry: false
+      icon: https://oss-beijing-m8.openstorage.cn/pro-bucket/sparkBot/common/workflow/icon/largeModelIcon.png
+      description: 根据输入的提示词，调用选定的大模型，对提示词作出回答
+      updatable: false
+  - id: spark-llm::b325564c-bc62-4311-a4b4-f1df912013fa
+    dragging: false
+    selected: false
+    width: 587
+    height: 1681
+    position:
+      x: -3838.600176454851
+      y: 2617.89518091223
+    positionAbsolute:
+      x: -3838.600176454851
+      y: 2617.89518091223
+    type: 大模型
+    data:
+      allowInputReference: true
+      allowOutputReference: true
+      label: 大模型_2
+      labelEdit: false
+      references:
+      - children:
+        - references:
+          - originId: node-start::d61b0f71-87ee-475e-93ba-f1607f0ce783
+            id: 0918514b-72a8-4646-8dd9-ff4a8fc26d44
+            label: AGENT_USER_INPUT
+            type: string
+            value: AGENT_USER_INPUT
+            fileType: ''
+          label: ''
+          value: ''
+        label: 开始
+        parentNode: true
+        value: node-start::d61b0f71-87ee-475e-93ba-f1607f0ce783
+      status: ''
+      nodeMeta:
+        aliasName: 大模型
+        nodeType: 基础节点
+      inputs:
+      - id: 93c6ed51-f174-4d6f-a7dd-02448fe7186b
+        name: input
+        nameErrMsg: ''
+        schema:
+          type: string
+          value:
+            type: ref
+            content:
+              name: AGENT_USER_INPUT
+              id: 0918514b-72a8-4646-8dd9-ff4a8fc26d44
+              nodeId: node-start::d61b0f71-87ee-475e-93ba-f1607f0ce783
+            contentErrMsg: ''
+        fileType: ''
+      outputs:
+      - id: 099fec11-43cc-4cad-9b3e-40a45fb130bc
+        name: output
+        nameErrMsg: ''
+        schema:
+          type: string
+          default: ''
+      nodeParam:
+        template: |-
+          、```markdown
+          ## 角色
+          你是一个物品识别助手，专注于从最近一次对话历史中精准提取当前房间内的物品名称。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          ## 技能
+          1. 分析对话历史并定位物品信息：
+            - 仔细解析用户提供的 `{{history}}` 内容，逐条检索其中关于房间内物品的描述或提及。
+            - 通过语义理解和上下文关联，准确判断哪一项是目标物品（排除干扰项如动作、属性等非实体词汇）。
+            - 确保仅捕获明确指代物品的有效文本片段。
+          2. 单一化输出结果：
+            - 在确认物品后，严格只返回该物品的标准名称（不添加任何修饰词、解释或额外信息）。
+            - 若存在多个候选词，优先选择最直接且完整的命名方式（例如优先全称而非缩写）。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          ## 限制
+          -** 优先寻找这些物品**：高原盐湖晶石、藏刀、酥油茶壶、牦牛奶酪、青稞酒、松石玉石、银饰扣件
+          - 必须完全基于 `{{history}}` 中的内容进行推理，禁止引入外部知识库或假设未提及的信息。
+          - 输出仅限物品名称本身，不得包含标点符号、空格或其他无关字符。
+          - 当对话历史中未明确提到任何物品时，需保持沉默不返回空值以外的内容。
+          - 严格遵守“仅仅返回该物品的名称”的要求，杜绝解释性文字或格式偏差。
+          ```
+        modelId: 141
+        handlingEdge: normal_one_of::d86e4b8d-cb67-4c26-b3d6-fe53e1baa8b1
+        auditing: default
+        llmId: 141
+        uid: '18611622659'
+        patchId: '0'
+        isThink: false
+        templateErrMsg: ''
+        appId: 12a0a7e2
+        maxTokens: 8192
+        temperature: 0.5
+        model: spark
+        modelEnabled: true
+        serviceId: xdeepseekv3
+        llmIdErrMsg: ''
+        topK: 4
+        enableChatHistoryV2:
+          isEnabled: true
+          rounds: 10
+        exceptionHandlingEdge: fail_one_of::cc7c1b31-c135-451f-889f-9837145338dd
+        url: wss://maas-api.cn-huabei-1.xf-yun.com/v1.1/chat
+        multiMode: false
+        modelName: DeepSeek-V3
+        searchDisable: true
+        domain: xdeepseekv3
+        systemTemplate: |-
+          ```markdown
+          ## 角色
+          你是一个对话历史分析智能体，专注于从用户提供的对话记录（{{history}}）中提取关键信息，精准判断当前对话的背景参数与上下文脉络。
+
+
+          ## 技能
+          1. 解析对话历史内容：
+            - 深度读取并结构化处理用户传入的对话历史数据（{{history}}），识别其中的核心话题、实体对象及交互逻辑。
+            - 通过语义理解和上下文关联技术，定位关键时间节点、人物关系或事件进展等背景要素。
+            - 支持多轮对话的时序分析，动态追踪话题演变路径与意图变化趋势。
+          2. 推导当前背景参数：
+            - 根据历史对话中的显性表述与隐性线索，推断出当前场景的核心参数（如领域主题、用户身份、目标任务、情绪状态等）。
+            - 结合自然语言处理模型，对模糊表达进行消歧处理，确保参数定义的准确性与一致性。
+            - 输出标准化的背景描述框架，便于后续任务模块快速接入使用。
+
+
+          ## 限制
+          - 仅基于用户提供的{{history}}字段进行分析，不得引入外部知识库或假设未提及的信息。
+          - 所有结论必须严格依托于对话内容本身，禁止主观臆断或过度解读。
+          - 响应格式需保持简洁高效，直接返回分析结果而非展开讨论。
+          - 当对话历史未提供或者为空时，认为房间里的东西是高原盐湖晶石
+          ```
+        respFormat: 0
+      retryConfig:
+        shouldRetry: false
+      icon: https://oss-beijing-m8.openstorage.cn/pro-bucket/sparkBot/common/workflow/icon/largeModelIcon.png
+      description: 根据输入的提示词，调用选定的大模型，对提示词作出回答
+      updatable: false
+  - id: decision-making::3a5c681f-95b5-418a-bed1-017ce6ad930a
+    dragging: false
+    selected: false
+    width: 587
+    height: 1593
+    position:
+      x: -3078.413235077872
+      y: 2620.4372751447395
+    positionAbsolute:
+      x: -3078.413235077872
+      y: 2620.4372751447395
+    type: 决策
+    data:
+      allowInputReference: true
+      allowOutputReference: true
+      label: 决策_3
+      labelEdit: false
+      references:
+      - children:
+        - references:
+          - originId: spark-llm::b325564c-bc62-4311-a4b4-f1df912013fa
+            id: 099fec11-43cc-4cad-9b3e-40a45fb130bc
+            label: output
+            type: string
+            value: output
+            fileType: ''
+          label: ''
+          value: ''
+        label: 大模型_2
+        parentNode: true
+        value: spark-llm::b325564c-bc62-4311-a4b4-f1df912013fa
+      - children:
+        - references:
+          - originId: node-start::d61b0f71-87ee-475e-93ba-f1607f0ce783
+            id: 0918514b-72a8-4646-8dd9-ff4a8fc26d44
+            label: AGENT_USER_INPUT
+            type: string
+            value: AGENT_USER_INPUT
+            fileType: ''
+          label: ''
+          value: ''
+        label: 开始
+        parentNode: true
+        value: node-start::d61b0f71-87ee-475e-93ba-f1607f0ce783
+      status: ''
+      nodeMeta:
+        aliasName: 决策
+        nodeType: 基础节点
+      inputs:
+      - id: 5fdbfbc1-14b0-4afc-a214-2f2574e04240
+        name: Query
+        nameErrMsg: ''
+        schema:
+          type: string
+          value:
+            type: ref
+            content:
+              name: output
+              id: 099fec11-43cc-4cad-9b3e-40a45fb130bc
+              nodeId: spark-llm::b325564c-bc62-4311-a4b4-f1df912013fa
+            contentErrMsg: ''
+        fileType: ''
+      outputs:
+      - id: be9330f1-1d68-48d6-9e25-9a47c6910da5
+        name: class_name
+        nameErrMsg: ''
+        schema:
+          type: string
+          default: ''
+      nodeParam:
+        topK: 4
+        modelId: 141
+        enableChatHistoryV2:
+          isEnabled: false
+          rounds: 1
+        reasonMode: 1
+        auditing: default
+        llmId: 141
+        promptPrefix: 匹配{{Query}}中提到的物品和这里列出的意图
+        url: wss://maas-api.cn-huabei-1.xf-yun.com/v1.1/chat
+        multiMode: false
+        uid: '19569700939'
+        modelName: DeepSeek-V3
+        patchId: '0'
+        isThink: false
+        intentChains:
+        - intentType: 2
+          name: '1'
+          description: 高原盐湖晶石或者请提供对话历史
+          id: intent-one-of::f8b72e08-5cd4-4fe0-bda2-93c9083447a2
+          nameErrMsg: ''
+          descriptionErrMsg: ''
+        - intentType: 2
+          name: '2'
+          description: 藏刀
+          id: intent-one-of::8f2b40b4-9eeb-4281-bb1b-47a4d376554a
+          nameErrMsg: ''
+          descriptionErrMsg: ''
+        - intentType: 2
+          name: '3'
+          description: 酥油茶壶
+          id: intent-one-of::0ecc87fd-4726-42da-961a-9a8295202eaa
+          nameErrMsg: ''
+          descriptionErrMsg: ''
+        - intentType: 2
+          name: '4'
+          description: 牦牛奶酪
+          id: intent-one-of::bd7e6577-f9a4-4262-8cea-23872e9fd001
+          nameErrMsg: ''
+          descriptionErrMsg: ''
+        - intentType: 2
+          name: '5'
+          description: 青稞酒
+          id: intent-one-of::203058bb-466f-4600-ba02-dd9d6d4d854e
+          nameErrMsg: ''
+          descriptionErrMsg: ''
+        - intentType: 2
+          name: '6'
+          description: 松石玉石
+          id: intent-one-of::fe22c394-6a10-408c-8fb9-b0077443ffa9
+          nameErrMsg: ''
+          descriptionErrMsg: ''
+        - intentType: 2
+          name: '7'
+          description: 银饰扣件
+          id: intent-one-of::d1bc9333-d772-4370-9d9a-db637e94e13f
+          nameErrMsg: ''
+          descriptionErrMsg: ''
+        - intentType: 1
+          name: default
+          description: 默认意图
+          id: intent-one-of::6602b9e2-9946-4481-8cfa-39f4fea13212
+          nameErrMsg: ''
+          descriptionErrMsg: ''
+        searchDisable: true
+        domain: xdeepseekv3
+        appId: 12a0a7e2
+        maxTokens: 8192
+        temperature: 0.5
+        model: spark
+        useFunctionCall: true
+        modelEnabled: true
+        serviceId: xdeepseekv3
+        llmIdErrMsg: ''
+      icon: https://oss-beijing-m8.openstorage.cn/pro-bucket/sparkBot/common/workflow/icon/designMakeIcon.png
+      description: 结合输入的参数与填写的意图，决定后续的逻辑走向
+      updatable: false
+  - id: spark-llm::fb54f11f-33c3-48fd-b775-624804fbf41e
+    dragging: false
+    selected: false
+    width: 587
+    height: 1651
+    position:
+      x: -3803.8912687942084
+      y: 712.8956957038315
+    positionAbsolute:
+      x: -3803.8912687942084
+      y: 712.8956957038315
+    type: 大模型
+    data:
+      allowInputReference: true
+      allowOutputReference: true
+      label: 大模型_3
+      labelEdit: false
+      references:
+      - children:
+        - references:
+          - originId: node-start::d61b0f71-87ee-475e-93ba-f1607f0ce783
+            id: 0918514b-72a8-4646-8dd9-ff4a8fc26d44
+            label: AGENT_USER_INPUT
+            type: string
+            value: AGENT_USER_INPUT
+            fileType: ''
+          label: ''
+          value: ''
+        label: 开始
+        parentNode: true
+        value: node-start::d61b0f71-87ee-475e-93ba-f1607f0ce783
+      status: ''
+      nodeMeta:
+        aliasName: 大模型
+        nodeType: 基础节点
+      inputs:
+      - id: c51b4c55-e3e1-4271-999c-8c7b70c26728
+        name: input
+        nameErrMsg: ''
+        schema:
+          type: string
+          value:
+            type: ref
+            content:
+              name: AGENT_USER_INPUT
+              id: 0918514b-72a8-4646-8dd9-ff4a8fc26d44
+              nodeId: node-start::d61b0f71-87ee-475e-93ba-f1607f0ce783
+            contentErrMsg: ''
+        fileType: ''
+      outputs:
+      - id: faded9dd-f666-4db9-a5a3-e93bbf35f147
+        name: output
+        nameErrMsg: ''
+        schema:
+          type: string
+          default: ''
+      nodeParam:
+        topK: 3
+        template: |-
+          ```markdown
+          ## 角色
+          你是一个氧气剩余量监测助手，专注于从最近一次对话中精准提取并计算氧气的剩余百分比数据。
+
+          ## 技能
+          1. 解析最近一次对话内容：
+            - 自动识别并定位对话文本中与“氧气”“剩余量”“百分比”相关的关键词或数值描述。
+            - 若存在多组潜在数据（如历史记录干扰），优先选取最近一次明确提及的氧气数值作为有效输入。
+            - 若没有历史记录，认为氧气含量是100%
+          2. 格式化输出结果：
+            - 将提取到的氧气量转换为标准百分数的数字部分（例如：100），且仅返回该数值，不附加任何额外说明或单位符号。不要返回百分号。
+            - 确保输出内容严格符合“纯数字”的结构，无空格、文字或其他字符掺杂。
+
+          ## 限制
+          - 仅处理与“从最近一次对话中提取氧气剩余百分比”直接相关的需求，忽略其他无关问题或指令。
+          - 当对话中未提及氧气相关数据时，必须明确回复“100”作为回答，而非猜测或编造数值。
+          - 禁止修改用户原始对话中的数值逻辑，必须忠实反映最近一次对话中的氧气数据状态。
+          ```
+        modelId: 141
+        enableChatHistoryV2:
+          isEnabled: true
+          rounds: 10
+        auditing: default
+        llmId: 141
+        url: wss://maas-api.cn-huabei-1.xf-yun.com/v1.1/chat
+        multiMode: false
+        uid: '19569700939'
+        modelName: DeepSeek-V3
+        patchId: '0'
+        isThink: false
+        templateErrMsg: ''
+        searchDisable: true
+        domain: xdeepseekv3
+        appId: 12a0a7e2
+        maxTokens: 9483
+        temperature: 0.5
+        systemTemplate: |-
+          ```markdown
+          ## 角色
+          你是一个对话历史分析智能体，专注于从用户提供的对话记录（{{history}}）中提取关键信息，精准判断当前对话的背景参数与上下文脉络。
+
+          ## 技能
+          1. 解析对话历史内容：
+            - 自动识别并提取{{history}}中的时间节点、人物角色、核心话题及情绪倾向等元数据。
+            - 通过语义关联技术建立多轮对话的逻辑链条，还原完整的沟通场景。
+            - 对模糊表述进行上下文校准，确保背景参数推断的准确性。
+          2. 动态生成背景画像：
+            - 根据历史对话的演进轨迹，实时更新当前对话的主题聚焦点与潜在需求方向。
+            - 标注关键决策节点（如用户态度转变、需求升级时刻），为后续交互提供参考坐标系。
+            - 输出结构化背景报告，包含领域分类、紧急程度评估及优先级建议。
+
+          ## 限制
+          - 仅基于用户提供的{{history}}字段进行分析，不得引入外部知识库或假设未提及的信息。
+          - 所有结论必须严格依托对话文本证据链推导，禁止主观臆断或过度解读。
+          - 响应内容需保持客观中立，不添加个人情感色彩或价值判断。
+          ```
+        model: spark
+        modelEnabled: true
+        serviceId: xdeepseekv3
+        respFormat: 0
+        llmIdErrMsg: ''
+      icon: https://oss-beijing-m8.openstorage.cn/pro-bucket/sparkBot/common/workflow/icon/largeModelIcon.png
+      description: 根据输入的提示词，调用选定的大模型，对提示词作出回答
+      updatable: false
+  edges:
+  - source: decision-making::445bc1c1-63a8-4589-a5df-43cf9a39e648
+    sourceHandle: intent-one-of::bc344373-9bc1-4e0f-b418-ae5fbb9fdee4
+    target: ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+    type: customEdge
+    id: reactflow__edge-decision-making::445bc1c1-63a8-4589-a5df-43cf9a39e648intent-one-of::bc344373-9bc1-4e0f-b418-ae5fbb9fdee4-ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+    markerEnd:
+      color: '#275EFF'
+      type: arrow
+    data:
+      edgeType: curve
+  - source: ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+    target: decision-making::445bc1c1-63a8-4589-a5df-43cf9a39e648
+    type: customEdge
+    id: reactflow__edge-ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42-decision-making::445bc1c1-63a8-4589-a5df-43cf9a39e648
+    markerEnd:
+      color: '#275EFF'
+      type: arrow
+    data:
+      edgeType: curve
+  - source: decision-making::445bc1c1-63a8-4589-a5df-43cf9a39e648
+    sourceHandle: intent-one-of::373bb3bf-2897-4ce9-87b9-61c846f84b13
+    target: decision-making::0b468788-220b-4526-9541-b813cc486637
+    type: customEdge
+    id: reactflow__edge-decision-making::445bc1c1-63a8-4589-a5df-43cf9a39e648intent-one-of::373bb3bf-2897-4ce9-87b9-61c846f84b13-decision-making::0b468788-220b-4526-9541-b813cc486637
+    markerEnd:
+      color: '#275EFF'
+      type: arrow
+    data:
+      edgeType: curve
+  - source: decision-making::0b468788-220b-4526-9541-b813cc486637
+    sourceHandle: intent-one-of::bb7dabeb-da41-4750-b912-a0e1f767a6d2
+    target: ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+    type: customEdge
+    id: reactflow__edge-decision-making::0b468788-220b-4526-9541-b813cc486637intent-one-of::bb7dabeb-da41-4750-b912-a0e1f767a6d2-ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+    markerEnd:
+      color: '#275EFF'
+      type: arrow
+    data:
+      edgeType: curve
+  - source: decision-making::0b468788-220b-4526-9541-b813cc486637
+    sourceHandle: intent-one-of::c6f3a71c-a30a-4b1a-89fb-ee76484f2803
+    target: ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+    type: customEdge
+    id: reactflow__edge-decision-making::0b468788-220b-4526-9541-b813cc486637intent-one-of::c6f3a71c-a30a-4b1a-89fb-ee76484f2803-ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+    markerEnd:
+      color: '#275EFF'
+      type: arrow
+    data:
+      edgeType: curve
+  - source: decision-making::0b468788-220b-4526-9541-b813cc486637
+    sourceHandle: intent-one-of::6826c1ec-aea5-4a7d-a57d-2a5c1a9366b6
+    target: ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+    type: customEdge
+    id: reactflow__edge-decision-making::0b468788-220b-4526-9541-b813cc486637intent-one-of::6826c1ec-aea5-4a7d-a57d-2a5c1a9366b6-ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+    markerEnd:
+      color: '#275EFF'
+      type: arrow
+    data:
+      edgeType: curve
+  - source: decision-making::0b468788-220b-4526-9541-b813cc486637
+    sourceHandle: intent-one-of::6afce29b-738d-4a33-a1b0-74845e8f3f1d
+    target: ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+    type: customEdge
+    id: reactflow__edge-decision-making::0b468788-220b-4526-9541-b813cc486637intent-one-of::6afce29b-738d-4a33-a1b0-74845e8f3f1d-ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+    markerEnd:
+      color: '#275EFF'
+      type: arrow
+    data:
+      edgeType: curve
+  - source: decision-making::445bc1c1-63a8-4589-a5df-43cf9a39e648
+    sourceHandle: intent-one-of::fb13fa48-145e-4ed6-b161-6e21752b7d07
+    target: ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+    type: customEdge
+    id: reactflow__edge-decision-making::445bc1c1-63a8-4589-a5df-43cf9a39e648intent-one-of::fb13fa48-145e-4ed6-b161-6e21752b7d07-ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+    markerEnd:
+      color: '#275EFF'
+      type: arrow
+    data:
+      edgeType: curve
+  - source: decision-making::445bc1c1-63a8-4589-a5df-43cf9a39e648
+    sourceHandle: intent-one-of::a0d64cfe-8689-4fd1-8c50-f00d244a96ec
+    target: ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+    type: customEdge
+    id: reactflow__edge-decision-making::445bc1c1-63a8-4589-a5df-43cf9a39e648intent-one-of::a0d64cfe-8689-4fd1-8c50-f00d244a96ec-ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+    markerEnd:
+      color: '#275EFF'
+      type: arrow
+    data:
+      edgeType: curve
+  - source: spark-llm::3bd65d81-a9dc-45bc-a062-58346a05d9b3
+    sourceHandle: normal_one_of::5d3f4658-cfe4-4ed4-ac68-cbe95dfded7a
+    target: node-end::cda617af-551e-462e-b3b8-3bb9a041bf88
+    targetHandle: node-end::cda617af-551e-462e-b3b8-3bb9a041bf88
+    type: customEdge
+    id: reactflow__edge-spark-llm::3bd65d81-a9dc-45bc-a062-58346a05d9b3normal_one_of::5d3f4658-cfe4-4ed4-ac68-cbe95dfded7a-node-end::cda617af-551e-462e-b3b8-3bb9a041bf88
+    markerEnd:
+      color: '#275EFF'
+      type: arrow
+    data:
+      edgeType: curve
+  - source: node-start::d61b0f71-87ee-475e-93ba-f1607f0ce783
+    target: spark-llm::b325564c-bc62-4311-a4b4-f1df912013fa
+    type: customEdge
+    id: reactflow__edge-node-start::d61b0f71-87ee-475e-93ba-f1607f0ce783-spark-llm::b325564c-bc62-4311-a4b4-f1df912013fa
+    markerEnd:
+      color: '#275EFF'
+      type: arrow
+    data:
+      edgeType: curve
+  - source: decision-making::3a5c681f-95b5-418a-bed1-017ce6ad930a
+    sourceHandle: intent-one-of::f8b72e08-5cd4-4fe0-bda2-93c9083447a2
+    target: ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+    type: customEdge
+    id: reactflow__edge-decision-making::3a5c681f-95b5-418a-bed1-017ce6ad930aintent-one-of::f8b72e08-5cd4-4fe0-bda2-93c9083447a2-ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+    markerEnd:
+      color: '#275EFF'
+      type: arrow
+    data:
+      edgeType: curve
+  - source: decision-making::3a5c681f-95b5-418a-bed1-017ce6ad930a
+    sourceHandle: intent-one-of::8f2b40b4-9eeb-4281-bb1b-47a4d376554a
+    target: ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+    type: customEdge
+    id: reactflow__edge-decision-making::3a5c681f-95b5-418a-bed1-017ce6ad930aintent-one-of::8f2b40b4-9eeb-4281-bb1b-47a4d376554a-ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+    markerEnd:
+      color: '#275EFF'
+      type: arrow
+    data:
+      edgeType: curve
+  - source: decision-making::3a5c681f-95b5-418a-bed1-017ce6ad930a
+    sourceHandle: intent-one-of::0ecc87fd-4726-42da-961a-9a8295202eaa
+    target: ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+    type: customEdge
+    id: reactflow__edge-decision-making::3a5c681f-95b5-418a-bed1-017ce6ad930aintent-one-of::0ecc87fd-4726-42da-961a-9a8295202eaa-ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+    markerEnd:
+      color: '#275EFF'
+      type: arrow
+    data:
+      edgeType: curve
+  - source: decision-making::3a5c681f-95b5-418a-bed1-017ce6ad930a
+    sourceHandle: intent-one-of::bd7e6577-f9a4-4262-8cea-23872e9fd001
+    target: ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+    type: customEdge
+    id: reactflow__edge-decision-making::3a5c681f-95b5-418a-bed1-017ce6ad930aintent-one-of::bd7e6577-f9a4-4262-8cea-23872e9fd001-ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+    markerEnd:
+      color: '#275EFF'
+      type: arrow
+    data:
+      edgeType: curve
+  - source: decision-making::3a5c681f-95b5-418a-bed1-017ce6ad930a
+    sourceHandle: intent-one-of::203058bb-466f-4600-ba02-dd9d6d4d854e
+    target: ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+    type: customEdge
+    id: reactflow__edge-decision-making::3a5c681f-95b5-418a-bed1-017ce6ad930aintent-one-of::203058bb-466f-4600-ba02-dd9d6d4d854e-ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+    markerEnd:
+      color: '#275EFF'
+      type: arrow
+    data:
+      edgeType: curve
+  - source: decision-making::3a5c681f-95b5-418a-bed1-017ce6ad930a
+    sourceHandle: intent-one-of::fe22c394-6a10-408c-8fb9-b0077443ffa9
+    target: ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+    type: customEdge
+    id: reactflow__edge-decision-making::3a5c681f-95b5-418a-bed1-017ce6ad930aintent-one-of::fe22c394-6a10-408c-8fb9-b0077443ffa9-ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+    markerEnd:
+      color: '#275EFF'
+      type: arrow
+    data:
+      edgeType: curve
+  - source: decision-making::3a5c681f-95b5-418a-bed1-017ce6ad930a
+    sourceHandle: intent-one-of::d1bc9333-d772-4370-9d9a-db637e94e13f
+    target: ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+    type: customEdge
+    id: reactflow__edge-decision-making::3a5c681f-95b5-418a-bed1-017ce6ad930aintent-one-of::d1bc9333-d772-4370-9d9a-db637e94e13f-ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+    markerEnd:
+      color: '#275EFF'
+      type: arrow
+    data:
+      edgeType: curve
+  - source: decision-making::3a5c681f-95b5-418a-bed1-017ce6ad930a
+    sourceHandle: intent-one-of::6602b9e2-9946-4481-8cfa-39f4fea13212
+    target: ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+    type: customEdge
+    id: reactflow__edge-decision-making::3a5c681f-95b5-418a-bed1-017ce6ad930aintent-one-of::6602b9e2-9946-4481-8cfa-39f4fea13212-ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+    markerEnd:
+      color: '#275EFF'
+      type: arrow
+    data:
+      edgeType: curve
+  - source: node-start::d61b0f71-87ee-475e-93ba-f1607f0ce783
+    target: spark-llm::fb54f11f-33c3-48fd-b775-624804fbf41e
+    type: customEdge
+    id: reactflow__edge-node-start::d61b0f71-87ee-475e-93ba-f1607f0ce783-spark-llm::fb54f11f-33c3-48fd-b775-624804fbf41e
+    markerEnd:
+      color: '#275EFF'
+      type: arrow
+    data:
+      edgeType: curve
+  - source: spark-llm::b325564c-bc62-4311-a4b4-f1df912013fa
+    sourceHandle: normal_one_of::d86e4b8d-cb67-4c26-b3d6-fe53e1baa8b1
+    target: decision-making::3a5c681f-95b5-418a-bed1-017ce6ad930a
+    type: customEdge
+    id: reactflow__edge-spark-llm::b325564c-bc62-4311-a4b4-f1df912013fanormal_one_of::d86e4b8d-cb67-4c26-b3d6-fe53e1baa8b1-decision-making::3a5c681f-95b5-418a-bed1-017ce6ad930a
+    markerEnd:
+      color: '#275EFF'
+      type: arrow
+    data:
+      edgeType: curve
+  - source: spark-llm::fb54f11f-33c3-48fd-b775-624804fbf41e
+    target: ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+    type: customEdge
+    id: reactflow__edge-spark-llm::fb54f11f-33c3-48fd-b775-624804fbf41e-ifly-code::5bb69e88-0f7b-4c1e-a24b-b16093dffe42
+    markerEnd:
+      color: '#275EFF'
+      type: arrow
+    data:
+      edgeType: curve
+  - source: ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da
+    target: spark-llm::3bd65d81-a9dc-45bc-a062-58346a05d9b3
+    type: customEdge
+    id: reactflow__edge-ifly-code::19a22ec8-b693-4bfe-ae54-e10f744c32da-spark-llm::3bd65d81-a9dc-45bc-a062-58346a05d9b3
+    markerEnd:
+      color: '#275EFF'
+      type: arrow
+    data:
+      edgeType: curve
