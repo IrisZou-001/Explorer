@@ -1,5 +1,6 @@
 # Explorer
-密室NPC Agent
+鲸娱秘境 密室NPC Agent
+
 
 ## 环境要求
 - Python 3.6+ 
